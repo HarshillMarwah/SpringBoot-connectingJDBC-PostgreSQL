@@ -28,6 +28,8 @@ public class StudentRepo {
     public List<Student> findAll() {
         System.out.println("Entering findAll @ StudentRepo");
         String sql = "Select * from Student";
+
+        //RowMapper no Lambda used. Overriding function
         /*RowMapper<Student> rowMapper = new RowMapper<Student>() {
             @Override
             public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -38,16 +40,23 @@ public class StudentRepo {
                 return s;
             }
         };*/
-
-        RowMapper<Student> rowMapper=(rs, rowNum) -> {
+        //RowMapper using Lambda expression
+        /*RowMapper<Student> rowMapper=(rs, rowNum) -> {
             Student s = new Student();
             s.setRollNO(rs.getInt("rollNo"));
             s.setName(rs.getString("name"));
             s.setMarks(rs.getInt("marks"));
             return s;
-        };
+        };*/
         System.out.println("ExitingfindAll @ StudentRepo");
-        return jdbc.query(sql,rowMapper);
+        //return jdbc.query(sql,rowMapper); //RowMapper with above Lambda
+        return jdbc.query(sql,(rs, rowNum) -> {
+            Student s = new Student();
+            s.setRollNO(rs.getInt("rollNo"));
+            s.setName(rs.getString("name"));
+            s.setMarks(rs.getInt("marks"));
+            return s;
+        }); //RowMapper with Inline Lambda
 //        return new ArrayList<>();
     }
 
