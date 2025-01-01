@@ -22,7 +22,7 @@ public class SpringJdbcLearningApplication {
 
 
 		StudentService service = context.getBean(StudentService.class);
-		service.addStudent(s);
+//		service.addStudent(s);
 		//Fetching all student
 		List<Student> students=service.getStudents();
 		System.out.println(students);
