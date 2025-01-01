@@ -42,6 +42,6 @@ public class Student {
                 "rollNO=" + rollNO +
                 ", name='" + name + '\'' +
                 ", marks=" + marks +
-                '}';
+                '}' + '\n';
     }
 }
