@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope("Prototype")
+@Scope(value = "prototype")
 public class Student {
     private int rollNO;
     private String name;
