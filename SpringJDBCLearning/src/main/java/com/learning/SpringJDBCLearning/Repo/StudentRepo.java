@@ -28,7 +28,7 @@ public class StudentRepo {
     public List<Student> findAll() {
         System.out.println("Entering findAll @ StudentRepo");
         String sql = "Select * from Student";
-        RowMapper<Student> rowMapper = new RowMapper<Student>() {
+        /*RowMapper<Student> rowMapper = new RowMapper<Student>() {
             @Override
             public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Student s = new Student();
@@ -37,6 +37,14 @@ public class StudentRepo {
                 s.setMarks(rs.getInt("marks"));
                 return s;
             }
+        };*/
+
+        RowMapper<Student> rowMapper=(rs, rowNum) -> {
+            Student s = new Student();
+            s.setRollNO(rs.getInt("rollNo"));
+            s.setName(rs.getString("name"));
+            s.setMarks(rs.getInt("marks"));
+            return s;
         };
         System.out.println("ExitingfindAll @ StudentRepo");
         return jdbc.query(sql,rowMapper);
